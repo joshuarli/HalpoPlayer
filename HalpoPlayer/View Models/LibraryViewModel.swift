@@ -141,7 +141,7 @@ class LibraryViewModel: ObservableObject {
 	}
 	func albumTapped(album: GetAlbumListResponse.Album, coordinator: Coordinator) {
 		let converted = Album(albumListResponse: album)
-		if SubsonicClient.shared.reachability?.connection == Reachability.Connection.unavailable {
+		if SubsonicClient.shared.reachability?.connection == Reachability.Connection.unavailable || AccountHolder.shared.offline {
 			coordinator.albumTappedOffline(album: converted)
 		} else {
 			coordinator.albumTapped(albumId: album.id, scrollToSong: nil)
